@@ -24,4 +24,11 @@ const About = () => {
       <Typography
         variant="display1"
         align="center"
-        style={styles.header}
+        style={styles.header}>
+        About Code Map
+      </Typography>
+
+      <Grid container spacing={40}>
+        <Grid item xs={12}>
+          <p>Code Map solves the problem of having hundreds (maybe thousands!) of free online coding tutorials, articles, and projects at your finger tips but no good way to keep track of what you've finished, how you're progressing, or which one you'd like to do next.</p>
+          <p>With Code Map you can build your own personalized learning path with the content you want to learn
