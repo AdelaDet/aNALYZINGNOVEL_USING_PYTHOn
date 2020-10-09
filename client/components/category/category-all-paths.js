@@ -34,4 +34,20 @@ const CategoryAllPaths = (props) => {
           <Grid item lg={3} key={path.name}>
             <PathCard
               reviewCount={path.reviewCount || null}
-              userCount={path.userCoun
+              userCount={path.userCount || null}
+              name={path.name}
+              owner={path.owner}
+              rating={path.rating || 0}
+              uid={path.uid}
+              slug={path.slug}
+              category={categoryName}
+            />
+          </Grid>
+        )}
+        </Grid>
+      </Grid>
+    </div>
+  )
+}
+
+export default CategoryAllPaths
