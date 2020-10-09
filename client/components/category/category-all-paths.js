@@ -24,4 +24,14 @@ const CategoryAllPaths = (props) => {
   const pathsCount = paths.length
   return(
     <div style={styles.container}>
-      <h2 style={styles.header}>{
+      <h2 style={styles.header}>{`All ${categoryName} Learning Paths`}</h2>
+      <h3 style={styles.subheader}>
+        {`There ${pathsCount < 2 ? 'is' : 'are'} ${pathsCount} learning ${pathsCount < 2 ? 'path' : 'paths'} available`}
+      </h3>
+      <Grid container spacing={24} direction="row">
+        <Grid container item spacing={24} justify="center" >
+        {paths.map((path) =>
+          <Grid item lg={3} key={path.name}>
+            <PathCard
+              reviewCount={path.reviewCount || null}
+              userCount={path.userCoun
