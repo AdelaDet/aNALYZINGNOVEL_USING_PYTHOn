@@ -21,4 +21,13 @@ const CategoryCard = ({imageSlug, categoryName, pathCount}) => {
         <Card style={styles.container}>
           <img src={`/category-logos/${imageSlug}.png`} width={75} />
           <h2 style={styles.header}>{categoryName}</h2>
-          <Button color="prim
+          <Button color="primary">
+            {pathCount} Learning Path{pathCount > 1 ? 's' : ''}
+          </Button>
+        </Card>
+      </Link>
+    </div>
+  )
+}
+
+export default CategoryCard
