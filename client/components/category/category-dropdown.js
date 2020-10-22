@@ -50,4 +50,27 @@ class CategoryDropdown extends Component {
             return (
               <MenuItem
                 key={name}
-          
+                component={NavLink}
+                to={`/category/${name}`}
+                onClick={this.handleClose}>
+                {name}
+              </MenuItem>
+            )
+          })
+        }
+        </Menu>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    parentCategories: state.category.allParentCategories
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getParentCategories: () => {
+      dispatch(getAllParentCategoriesThunk())
