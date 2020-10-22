@@ -32,4 +32,22 @@ class CategoryDropdown extends Component {
     return (
       <div>
         <Button
-      
+          aria-owns={anchorEl ? 'fade-menu' : null}
+          aria-haspopup="true"
+          onClick={this.handleClick}
+        >
+          Categories
+        </Button>
+        <Menu
+          id="fade-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={this.handleClose}
+          TransitionComponent={Fade}
+        >
+        {
+          parentCategories.map((name) => {
+            return (
+              <MenuItem
+                key={name}
+          
