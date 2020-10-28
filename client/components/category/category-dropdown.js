@@ -74,3 +74,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getParentCategories: () => {
       dispatch(getAllParentCategoriesThunk())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryDropdown)
