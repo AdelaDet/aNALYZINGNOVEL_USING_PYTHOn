@@ -30,4 +30,19 @@ class PopularCategories extends React.Component {
   }
 
   createImageSlug = (str) => {
-    return str.toLowerCase().repla
+    return str.toLowerCase().replace(/\s/g, '')
+  }
+
+  render() {
+    const popularCategories = this.props.popularCategories
+    return(
+      <div style={styles.container}>
+        <h2 style={styles.header}>Popular Categories</h2>
+        <Grid container spacing={40}>
+        {
+          (popularCategories)
+          ? popularCategories.map(cat =>
+            <Grid item xs={3} key={cat.Category.identity.low}>
+              <CategoryCard
+                imageSlug={this.createImageSlug(cat.Category.properties.name)}
+  
