@@ -45,4 +45,29 @@ class PopularCategories extends React.Component {
             <Grid item xs={3} key={cat.Category.identity.low}>
               <CategoryCard
                 imageSlug={this.createImageSlug(cat.Category.properties.name)}
-  
+                categoryName={cat.Category.properties.name}
+                pathCount={cat.Paths.low}
+              />
+            </Grid>
+          )
+          : null
+        }
+        </Grid>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  return({
+    popularCategories : state.category.popularCategories,
+  })
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return({
+    getPopularCategories : () => dispatch(getPopularCategoriesThunk()),
+  })
+}
+
+export 
