@@ -7,4 +7,13 @@
 export {default as MainNav} from './nav-main'
 export {default as NavDashboard} from './nav-dashboard'
 export {default as UserHome} from './user-home'
-export {Login, Signup}
+export {Login, Signup} from './auth-form'
+export {default as CategorySinglePage} from './category/category-single'
+export { default as UserDashboard } from './user-dashboard'
+export { default as HomePage } from './home-main'
+export {default as Stars } from './paths'
+export {default as SearchAny} from './search-bar-any'
+export {default as About } from './about'
+export {default as PublicSinglePath} from './paths'
+export {default as Resource} from './resources'
+export {default as Foo
