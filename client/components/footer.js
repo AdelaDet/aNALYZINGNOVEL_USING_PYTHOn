@@ -33,4 +33,15 @@ const Footer = () => {
   return (
     <footer style={styles.footer}>
       <div style={styles.content}>
- 
+        <div style={styles.links}>
+          A project by <a href='https://github.com/J-Hust'>Justin Hustrulid</a>, <a href='https://github.com/maubertw'>Mary Warrick</a>, <a href='https://github.com/chansiky'>Chan Youn</a> and <a href='https://github.com/jamigibbs'>Jami Gibbs</a>
+        </div>
+        <div style={styles.logo}>
+          <i className="material-icons">explore</i>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+export default Footer
