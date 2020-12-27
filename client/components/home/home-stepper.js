@@ -88,3 +88,35 @@ class HomeStepper extends React.Component {
             );
           })}
         </Stepper>
+        <div style={styles.content}>
+          {this.state.activeStep === steps.length ? (
+            <div>
+              <Typography style={styles.instructions}>
+                Happy learning!!
+              </Typography>
+              <Button onClick={this.handleReset}>Reset</Button>
+            </div>
+          ) : (
+            <div>
+              <Typography style={styles.instructions}>{getStepContent(activeStep)}</Typography>
+              <div style={styles.buttons}>
+                <Button
+                  disabled={activeStep === 0}
+                  onClick={this.handleBack}
+                  className={classes.backButton}
+                >
+                  Back
+                </Button>
+                <Button variant="contained" color="primary" onClick={this.handleNext}>
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+}
+
+export default withStyles(styles)(HomeStepper);
