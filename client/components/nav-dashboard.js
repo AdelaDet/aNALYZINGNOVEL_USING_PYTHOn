@@ -16,4 +16,32 @@ class NavDashboard extends React.Component {
 
   constructor(){
     super()
-    this.stat
+    this.state = {
+      value: 'my-paths'
+    }
+  }
+
+  componentDidMount(){
+    this.setState({
+      value: this.props.view
+    })
+  }
+
+  handleChange = (event, value) => {
+    this.setState({ value })
+  }
+
+  render() {
+    return (
+      <Grid
+        style={styles.container}
+        container spacing={24}
+        direction="column"
+        align="center">
+
+        <Grid item xs={6}>
+          <Paper>
+            <Tabs
+              value={this.state.value}
+              indicatorColor="primary"
+        
