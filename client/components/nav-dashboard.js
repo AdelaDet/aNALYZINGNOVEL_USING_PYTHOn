@@ -62,4 +62,18 @@ class NavDashboard extends React.Component {
               />
 
               <Tab
-        
+                label="My Stats"
+                value="my-stats"
+                component={Link}
+                to="/user/dashboard/my-stats"
+              />
+            </Tabs>
+          </Paper>
+        </Grid>
+      </Grid>
+    )
+  }
+
+}
+
+export default NavDashboard
