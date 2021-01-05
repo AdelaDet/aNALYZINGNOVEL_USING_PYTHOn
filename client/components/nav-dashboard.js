@@ -44,4 +44,22 @@ class NavDashboard extends React.Component {
             <Tabs
               value={this.state.value}
               indicatorColor="primary"
+              textColor="primary"
+              onChange={this.handleChange}
+            >
+              <Tab
+                label="My Paths"
+                value="my-paths"
+                component={Link}
+                to="/user/dashboard/my-paths"
+              />
+
+              <Tab
+                label="Add New Path"
+                value="add-new-path"
+                component={Link}
+                to="/user/dashboard/add-new-path"
+              />
+
+              <Tab
         
