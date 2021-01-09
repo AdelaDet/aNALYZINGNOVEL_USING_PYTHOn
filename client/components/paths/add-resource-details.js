@@ -44,4 +44,25 @@ class AddResourceDetails extends Component {
     this.props.addStepToPath(username, pathUid, url, {...this.state}, 'new')
 
     this.setState({
-   
+      title: '',
+      description: '',
+      imageUrl: '',
+      type1: ''
+    })
+
+    this.props.getSinglePath(pathUid)
+
+    this.props.handleClose()
+  }
+
+  addResourceToPath = (username, pathUid, url, body) => {
+    this.props.addStepToPath(username, pathUid, url, body, 'existing')
+  }
+
+  render(){
+    const { username, pathUid, resource, url } = this.props
+    return (
+      <div>
+        { resource[0].found === false ? (
+          <div>
+            <p>We don't know this resource y
