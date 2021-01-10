@@ -65,4 +65,17 @@ class AddResourceDetails extends Component {
       <div>
         { resource[0].found === false ? (
           <div>
-            <p>We don't know this resource y
+            <p>We don't know this resource yet:</p>
+            <p>{url}</p>
+          <ValidatorForm
+            onChange={this.handleChange}
+            onSubmit={this.handleSubmit}
+            noValidate autoComplete="off"
+          >
+            <TextValidator
+              id="step-title"
+              label="What is the title of the resource?"
+              name="title"
+              value={this.state.title}
+              placeholder={resource[0].name || "ie. Fullstack Academy Jumpstart Online"}
+              f
