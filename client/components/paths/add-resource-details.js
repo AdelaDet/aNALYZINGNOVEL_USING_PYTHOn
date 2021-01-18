@@ -78,4 +78,16 @@ class AddResourceDetails extends Component {
               name="title"
               value={this.state.title}
               placeholder={resource[0].name || "ie. Fullstack Academy Jumpstart Online"}
-              f
+              fullWidth
+              margin="normal"
+              required={true}
+              validators={['required']}
+              errorMessages={['A title is required']}
+            />
+
+            <TextValidator
+              id="step-description"
+              label="Add a short description for the resource"
+              name="description"
+              value={this.state.description}
+              placeholder={re
