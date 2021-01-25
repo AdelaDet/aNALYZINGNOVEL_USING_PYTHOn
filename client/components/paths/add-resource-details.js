@@ -103,4 +103,24 @@ class AddResourceDetails extends Component {
               type="submit"
               size="large"
               variant="outlined">
-              Add Resource T
+              Add Resource To Your Path
+            </Button>
+
+          </ValidatorForm>
+          </div>
+          ) : (
+            <div>
+            <p>Resource exists! We'll add it right into your path.</p>
+            {this.addResourceToPath(username, pathUid, resource[0].url)}
+            </div>
+          )
+        }
+      </div>
+    )
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addStepToPath: (username, pathUid, url, body, type) => {
+      dispatch(add
