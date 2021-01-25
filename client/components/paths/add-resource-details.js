@@ -90,4 +90,17 @@ class AddResourceDetails extends Component {
               label="Add a short description for the resource"
               name="description"
               value={this.state.description}
-              placeholder={re
+              placeholder={resource[0].description || "ie. Jumpstart teaches the ABCs of programming in JavaScript"}
+              fullWidth
+              margin="normal"
+              required={true}
+              validators={['required']}
+              errorMessages={['A description is required']}
+            />
+
+            <Button
+              style={styles.button}
+              type="submit"
+              size="large"
+              variant="outlined">
+              Add Resource T
