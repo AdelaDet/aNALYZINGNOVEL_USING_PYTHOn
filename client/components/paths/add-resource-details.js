@@ -123,4 +123,12 @@ class AddResourceDetails extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     addStepToPath: (username, pathUid, url, body, type) => {
-      dispatch(add
+      dispatch(addStepToPathThunk(username, pathUid, url, body, type))
+    },
+    getSinglePath: (uid) => {
+      dispatch(getSinglePathByUidThunk(uid))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(AddResourceDetails)
