@@ -18,3 +18,10 @@ class BuilderTitle extends Component {
         margin="normal"
         required={true}
         validators={['required']}
+        errorMessages={['A unique path title is required']}
+      />
+    )
+  }
+}
+
+export default BuilderTitle
