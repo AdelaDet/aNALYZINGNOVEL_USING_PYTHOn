@@ -24,4 +24,16 @@ const BuilderLevel = ({classes, level}) => {
       <FormLabel component="legend">What skill level is your path?</FormLabel>
       <RadioGroup
         aria-label="level"
-        name=
+        name="level"
+        className={classes.group}
+        value={level}
+      >
+        <FormControlLabel value="beginner" control={<Radio />} label="Beginner" />
+        <FormControlLabel value="intermediate" control={<Radio />} label="Intermediate" />
+        <FormControlLabel value="advanced" control={<Radio />} label="Advanced" />
+      </RadioGroup>
+    </FormControl>
+  )
+}
+
+export default withStyles(styles)(BuilderLevel);
