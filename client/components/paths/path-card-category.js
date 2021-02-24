@@ -31,4 +31,19 @@ const PathCardSmallCategory = (props) => {
    const {img, name, rating, description, uid, slug} = props
    const url = props.url || 'home'
     return(
-  
+      <div>
+        <Link to={`/paths/${uid}/${slug}`}>
+          <Card >
+            <img src={img} style={{height:150}}/>
+            <CardContent>
+              <h4 style={{margin:0}}>{name}</h4>
+              <p style={{margin:0}}>{description}</p>
+              <Stars value={rating} />
+            </CardContent>
+          </Card>
+        </Link>
+      </div>
+    )}
+
+
+export default PathCardSmallCategory
