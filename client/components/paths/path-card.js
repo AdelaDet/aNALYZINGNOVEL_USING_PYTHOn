@@ -76,3 +76,20 @@ const PathCard = (props) => {
       <div style={styles.content}>
         <Link to={`/paths/${uid}/${slug}`}>
           <Typography style={styles.title} align='center' variant="body2">{name}</Typography>
+        </Link>
+        <Typography style={styles.owner} align='center' variant="body2">by {owner}</Typography>
+      </div>
+
+      <div style={styles.meta}>
+        <div style={styles.rating}>
+          <Stars style={styles.rating} value={rating} />
+        </div>
+        <div style={styles.subscribers}>
+        <Typography variant="body2">{userCount} Subscribers</Typography>
+        </div>
+      </div>
+    </Card>
+  )
+}
+
+export default PathCard
