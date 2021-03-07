@@ -49,4 +49,12 @@ const PathUserDirectory = ({paths, handleSelect, selected}) => {
             )
           })
         }
-      </
+      </MenuList>
+      )
+
+      }
+    </div>
+  )
+}
+
+export default PathUserDirectory
