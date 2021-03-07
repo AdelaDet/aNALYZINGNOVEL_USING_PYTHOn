@@ -20,4 +20,16 @@ const styles = {
   }
 }
 
-const PathUser
+const PathUserDirectory = ({paths, handleSelect, selected}) => {
+  let active = false
+  return (
+    <div style={styles.container}>
+      <h4 style={styles.header}>My Paths Directory</h4>
+      { paths.length === 0 ? (
+        <div style={styles.noPaths}>
+          <p>No learning paths yet! Why not <Link to="/">add</Link> or <Link to="/user/dashboard/add-new-path">create</Link> one?</p>
+        </div>
+      ) : (
+        <MenuList>
+        { paths.map((path) => {
+     
