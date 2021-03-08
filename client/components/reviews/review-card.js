@@ -22,4 +22,16 @@ const ReviewCard = (props) => {
       <ListItemText>
         {props.author}
       </ListItemText>
-      <Sta
+      <Stars value={props.rating} />
+      </ListItem>
+      <ListItem>
+      <ListItemText>
+        {props.comments}
+      </ListItemText>
+      </ListItem>
+    </List>
+    </div>
+  )
+}
+
+export default ReviewCard
