@@ -42,4 +42,25 @@ class SearchAny extends Component {
       //if you have your routes set up correctly, this clause should make it so
       //that you don't have to pass in any additional props
         if(this.props.match.params.categoryName){
-          this.props.fuzzyMatchByCategory(this.state.input
+          this.props.fuzzyMatchByCategory(this.state.input, this.props.category)
+        }else{
+          this.props.fuzzyMatch(this.state.input)
+        }
+    }
+
+
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      return this.props.matches
+    }
+  }
+
+  mapOptions = () => {
+    const matches = this.props.matches
+    if(matches.length && this.state.input !== ''){
+      return(<div>
+        {
+          matches.map((match) => {
+            const {name, uid, slug} = match
+            if(match.type === 'Path'){
+             
