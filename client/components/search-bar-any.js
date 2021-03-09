@@ -27,4 +27,19 @@ const MatchRow = styled.div`
   }
 `
 
-class SearchAn
+class SearchAny extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      input: ''
+    }
+  }
+
+  handleChange = async (event) => {
+      await this.setState({
+        input: event.target.value
+      })
+      //if you have your routes set up correctly, this clause should make it so
+      //that you don't have to pass in any additional props
+        if(this.props.match.params.categoryName){
+          this.props.fuzzyMatchByCategory(this.state.input
