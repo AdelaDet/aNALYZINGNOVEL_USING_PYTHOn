@@ -79,4 +79,25 @@ class SearchAny extends Component {
     return (
       <div className="search-bar-any">
         <input
-          id="se
+          id="search"
+          onChange={this.handleChange}
+          onKeyPress={(e) => {
+            if(e.key === 'Enter')
+            this.handleKeyPress(e)
+          }}
+          value={this.state.input}
+          label="Refine your search"
+          type="search"
+          margin="normal"
+          placeholder={this.props.placeholder && this.props.placeholder}
+        />
+        <DropDown>{this.mapOptions()}</DropDown>
+      </div>
+    )
+
+  }
+
+}
+
+const mapState = (state) => {
+    re
