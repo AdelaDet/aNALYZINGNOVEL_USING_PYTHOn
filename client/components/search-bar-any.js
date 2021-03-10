@@ -100,4 +100,21 @@ class SearchAny extends Component {
 }
 
 const mapState = (state) => {
-    re
+    return {
+      matches: state.searchMatches
+    }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+    fuzzyMatchByCategory : (string, category)=> {
+      dispatch(createMatchAllInCategoryThunk(string, category))
+    },
+    fuzzyMatch : (string) => {
+      dispatch(createFuzzyMatchThunk(string))
+    }
+  }
+}
+
+export default withRouter(connect(mapState, mapDispatch)(SearchAny))
+
