@@ -63,4 +63,20 @@ class SearchAny extends Component {
           matches.map((match) => {
             const {name, uid, slug} = match
             if(match.type === 'Path'){
-             
+              return <Link to={`/paths/${uid}/${slug}`} key={uid}><MatchRow><p>In Learning Paths - {name}</p></MatchRow></Link>
+            }else{
+              return <Link to={`/category/${name}`} key={name}><MatchRow><p>In Categories - {name}</p></MatchRow></Link>
+            }
+          })
+        }
+        </div>
+
+      )
+    }
+  }
+
+  render () {
+    return (
+      <div className="search-bar-any">
+        <input
+          id="se
