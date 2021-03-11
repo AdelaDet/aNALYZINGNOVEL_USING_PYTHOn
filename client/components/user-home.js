@@ -29,4 +29,6 @@ export default connect(mapState)(UserHome)
 /**
  * PROP TYPES
  */
-UserHome.propTy
+UserHome.propTypes = {
+  name: PropTypes.string
+}
