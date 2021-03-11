@@ -10,4 +10,17 @@ import {me} from './store'
 
 class Routes extends Component {
   componentDidMount() {
-    this.props.loadIni
+    this.props.loadInitialData()
+  }
+
+  render() {
+    const {isLoggedIn} = this.props
+
+    return (
+      <Switch>
+        {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={HomePage} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        {/* <Route path="/resource/:resourceUid" component={Resource} /> */}
+        <Route exact path="/category/:categoryName" component={Categor
