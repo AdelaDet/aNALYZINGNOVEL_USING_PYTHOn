@@ -123,3 +123,19 @@ const mapStateToProps = (state) => {
     singlePathRev: state.reviews.pathReview
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getSingleUserPaths: (username) => {
+      dispatch(getSingleUserPathsThunk(username))
+    },
+    getSinglePathByUid: (uid) => {
+      dispatch(getSinglePathByUidThunk(uid))
+    },
+    getSinglePathReview: (username, uid) => {
+      dispatch(getCurrentPathReviewThunk(username, uid))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserDashboard)
