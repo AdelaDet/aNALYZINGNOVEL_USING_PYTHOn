@@ -23,4 +23,12 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {/* <Route path="/resource/:resourceUid" component={Resource} /> */}
-        <Route exact path="/category/:categoryName" component={Categor
+        <Route exact path="/category/:categoryName" component={CategorySinglePage} />
+        <Route path="/paths/:pathUid/:pathSlug" component={PublicSinglePath} />
+        <Route exact path="/about" component={About} />
+        {isLoggedIn && (
+          <Switch>
+            {/* Routes placed here are only available after logging in */}
+            <Route path="/home" component={UserHome} />
+            <Redirect exact from="/user/dashboard" to="/user/dashboard/my-paths" />
+            <Route path="/user/dashboard/:view
