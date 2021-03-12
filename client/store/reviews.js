@@ -14,4 +14,26 @@ const reviewPath = (review) => {
 
 const getCurrentPathReview = (review) => {
   return {
-    type: GET_CURRENT_PA
+    type: GET_CURRENT_PATH_REVIEW,
+    review
+  }
+}
+
+const setAllReviewsOfResource = (reviews, uid) => {
+  return {
+    type: SET_ALL_REVIEWS_OF_RESOURCE,
+    reviews,
+    uid
+  }
+}
+
+const gotUserResourceReview = (rating) => {
+  return {
+    type: GOT_USER_RESOURCE_REVIEW,
+    rating
+  }
+}
+
+export const getCurrentPathReviewThunk = (username, pathuid) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(`/api/paths/${pathuid}/${username}/get-revi
