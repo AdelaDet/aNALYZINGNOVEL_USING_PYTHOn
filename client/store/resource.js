@@ -24,4 +24,8 @@ export default function( state = initialState, action ){ // eslint-disable-line
   switch (action.type) {
     case SET_ALL_REVIEWS_OF_RESOURCE:
       const combinedReviews = Object.assign(state.reviews, action.reviews)
-      r
+      return {...state, reviews: combinedReviews}
+    default:
+      return state
+  }
+}
