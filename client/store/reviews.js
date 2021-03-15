@@ -66,4 +66,21 @@ export const addResourceReview = (rating) => {
 
 export const getUserResourceReview = (body) => {
   return async (dispatch) => {
-    const 
+    const { data } = await axios.get(`/api/userAuth/reviews/resource/${body.resourceUid}/user/${body.userUid}`)
+    // dispatch(gotUserResourceReview(data[0]))
+  }
+}
+
+const getAverageReviewRating = (reviews) => {
+  let ratingTotal = 0
+
+  if(reviews.data.length > 0){
+    ratingTotal = reviews.data.reduce((acc, review) => {
+      if(review.score.low){
+        return acc + review.score.low
+      } else {
+        return acc + review.score
+      }
+    }, 0)
+
+    return ratingT
