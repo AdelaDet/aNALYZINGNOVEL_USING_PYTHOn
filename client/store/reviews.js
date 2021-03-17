@@ -105,4 +105,18 @@ export default function( state = initialState, action ){
       }
       return {
         ...state,
-        allRe
+        allResourceReviews: [...state.allResourceReviews, result]
+      }
+    }
+    case GOT_USER_RESOURCE_REVIEW: {
+      let resourceReviewRating = action.rating.low ? action.rating.low : action.rating
+      return {...state, resourceReviewRating}
+    }
+    case GET_CURRENT_PATH_REVIEW:
+      return {...state, pathReview: action.review}
+    case REVIEW_PATH:
+      return {...state, pathReview: action.review}
+    default:
+      return state
+  }
+}
