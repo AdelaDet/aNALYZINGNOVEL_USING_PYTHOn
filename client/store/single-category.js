@@ -34,4 +34,20 @@ export const createGetSingleCategoryThunk = (category) => {
         const {description, level, name, status, url, uid, slug} = properties
         return {type: labels[0], uid, slug, description, level, name, rating, url, status: status || null}
      })
-   
+     dispatch(returnAllItemsInCategory({category, content}))
+   }
+}
+
+/**
+ * REDUCER
+ */
+export default function(state = initialState, action) {
+  switch (action.type) {
+    case FIND_ALL_ITEMS_IN_A_CATEGORY:
+        const paths = action.content.filter(item => item.type === 'Path')
+        const resources = action.content.filter(item => item.type === 'Resource')
+        return { paths, resources, name: action.name }
+    default:
+      return state
+  }
+}
