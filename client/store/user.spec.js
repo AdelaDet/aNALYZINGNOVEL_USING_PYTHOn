@@ -29,3 +29,16 @@ describe('thunk creators', () => {
 
   describe('me', () => {
     it('eventually dispatches the GET USER action', async () => {
+      const fakeUser = {email: 'Cody'}
+      mockAxios.onGet('/auth/me').replyOnce(200, fakeUser)
+      await store.dispatch(me())
+      const actions = store.getActions()
+      expect(actions[0].type).to.be.equal('GET_USER')
+      expect(actions[0].user).to.be.deep.equal(fakeUser)
+    })
+  })
+
+  describe('logout', () => {
+    it('logout: eventually dispatches the REMOVE_USER action', async () => {
+      mockAxios.onPost('/auth/logout').replyOnce(204)
+      await store.dispatch(logout(
