@@ -1,0 +1,13 @@
+{
+  "name": "code-map",
+  "version": "1.0.0",
+  "description": "A learning application to help you learn to code.",
+  "engines": {
+    "node": ">= 7.0.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build-client": "webpack",
+    "build-client-watch": "webpack -w",
+    "deploy": "script/deploy",
+    "l
