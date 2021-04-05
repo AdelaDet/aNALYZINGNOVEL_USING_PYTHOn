@@ -43,4 +43,39 @@ label {
 
 nav a {
   display: inline-block;
-  margin: 1em
+  margin: 1em;
+}
+
+p {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 2.1em;
+}
+
+/* Stickey Footer */
+.Site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.Site-content {
+  flex: 1;
+}
+
+/* Home */
+#home-fold::after {
+  content: "";
+  background: url('/world.svg');
+  opacity: 0.04;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+/* S
