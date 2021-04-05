@@ -1,0 +1,46 @@
+body {
+  font-family: sans-serif;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: none;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #2a3b47
+}
+
+a {
+  color: #2a3b47;
+  text-decoration: none;
+}
+
+/* unvisited link */
+a:link {
+  color: #2a3b47;
+}
+
+/* visited link */
+a:visited {
+  color: #2a3b47;
+}
+
+/* mouse over link */
+a:hover {
+  color: #3F51B5;
+}
+
+/* selected link */
+a:active {
+  color: #3F51B5;
+}
+
+label {
+  display: block;
+}
+
+nav a {
+  display: inline-block;
+  margin: 1em
