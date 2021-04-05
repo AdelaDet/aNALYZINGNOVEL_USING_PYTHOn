@@ -78,4 +78,31 @@ p {
   z-index: -1;
 }
 
-/* S
+/* Search Bar */
+.search-bar-any {
+  display: table;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.search-bar-any input[type=search] {
+  width: 600px;
+  height: 65px;
+  padding: 15px;
+  border: 1px solid #efefef;
+  font-size: 22px;
+  border-radius: 5px;
+}
+
+.search-bar-any input[type=search]:focus {
+  border-color:#333;
+}
+
+.search-bar-any ::-webkit-input-placeholder {
+  text-align: center;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 24;
+}
+
+.search-bar-any :-m
