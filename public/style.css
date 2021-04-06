@@ -105,4 +105,14 @@ p {
   font-size: 24;
 }
 
-.search-bar-any :-m
+.search-bar-any :-moz-placeholder { /* Firefox 18- */
+  text-align: center;
+}
+
+.search-bar-any ::-moz-placeholder {  /* Firefox 19+ */
+  text-align: center;
+}
+
+.search-bar-any :-ms-input-placeholder {
+  text-align: center;
+}
