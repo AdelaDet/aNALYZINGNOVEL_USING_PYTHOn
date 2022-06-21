@@ -18,4 +18,18 @@ const addSlugPaths = async () => {
     const slug = makeSlug(searchName)
     const query = `MATCH (n)
       WHERE n.name = {searchName}
-  
+      SET n.slug = {slug}`
+    const response = await session.run(query, {searchName, slug})
+   })
+}
+
+const addSlugResource = async () => {
+  const data = await session.run(`MATCH (n:Resource) RETURN n`)
+  const nodes = data.records
+  data.records.forEach(async (node) => {
+    const searchName = node._fields[0].properties.name
+    const slug = makeSlug(searchName)
+    const query = `MATCH (n)
+      WHERE n.name = {searchName}
+      SET n.slug = {slug}`
+    const response = await 
