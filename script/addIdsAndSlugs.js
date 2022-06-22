@@ -65,4 +65,22 @@ const addIdResource = async () => {
 }
 
 const addIdUsers = async () => {
-  const data = 
+  const data = await session.run(`MATCH (n:User) RETURN n`)
+  const nodes = data.records
+  data.records.forEach(async (node) => {
+    const searchName = node._fields[0].properties.name
+    const newId = shortid.generate()
+    const query = `MATCH (n)
+      WHERE n.name = {searchName}
+      SET n.uid = {newId}`
+    const response = await session.run(query, {searchName, newId})
+   })
+}
+
+addIdPaths()
+addIdResource()
+addIdUsers()
+addSlugPaths()
+addSlugResource()
+
+console.log
