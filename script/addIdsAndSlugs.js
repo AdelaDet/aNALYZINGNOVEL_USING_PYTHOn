@@ -32,4 +32,23 @@ const addSlugResource = async () => {
     const query = `MATCH (n)
       WHERE n.name = {searchName}
       SET n.slug = {slug}`
-    const response = await 
+    const response = await session.run(query, {searchName, slug})
+   })
+}
+
+
+
+const addIdPaths = async () => {
+  const data = await session.run(`MATCH (n:Path) RETURN n`)
+  const nodes = data.records
+  data.records.forEach(async (node) => {
+    const searchName = node._fields[0].properties.name
+    const newId = shortid.generate()
+    const query = `MATCH (n)
+      WHERE n.name = {searchName}
+      SET n.uid = {newId}`
+    const response = await session.run(query, {searchName, newId})
+   })
+}
+
+const 
