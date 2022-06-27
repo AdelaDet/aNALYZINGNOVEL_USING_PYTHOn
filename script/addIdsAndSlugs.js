@@ -83,4 +83,6 @@ addIdUsers()
 addSlugPaths()
 addSlugResource()
 
-console.log
+console.log('id/slug ran')
+
+module.exports = {addIdPaths, addIdResource, addSlugPaths, addSlugResource}
