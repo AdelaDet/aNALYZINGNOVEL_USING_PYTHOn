@@ -25,3 +25,27 @@ const getMetadata = url => {
         return metaObj
       }
     })
+    .catch(err => {
+      console.error(err.message)
+      return `could not retrieve metadata for ${url}`
+    })
+}
+
+const updateSeed = async () => {
+  let data = await session.run(`
+    MATCH (r:Resource)
+    RETURN collect(r.url)
+  `)
+  let urls = data.records[0]._fields[0].reverse()
+  let metaObj = {},
+    md = {},
+    metadata = {},
+    res = {}
+
+  for (let i = 0; i < urls.length; i++) {
+    try {
+      metadata = await scrape(urls[i])
+      md = metadata.openGraph
+      metaObj = {}
+
+      if (!md)
