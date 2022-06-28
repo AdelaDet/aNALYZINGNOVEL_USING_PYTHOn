@@ -48,4 +48,16 @@ const updateSeed = async () => {
       md = metadata.openGraph
       metaObj = {}
 
-      if (!md)
+      if (!md) {
+        throw new Error('No metadata found or empty string returned')
+      } else {
+        metaObj.name = md.title ? md.title : ''
+        metaObj.type = md.type ? md.type : ''
+        metaObj.description = md.description ? md.description : ''
+        metaObj.imageUrl = md.image ? md.image.url : ''
+
+        res = await session.run(
+          `
+          MATCH (r:Resource)
+          WHERE r.url = {url}
+          SET r.name = {name}, r.type = {type}, r.description 
