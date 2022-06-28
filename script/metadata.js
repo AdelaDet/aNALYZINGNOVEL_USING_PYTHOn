@@ -9,4 +9,19 @@ const getMetadata = url => {
   let metaObj = {}
   return scrape(url)
   .then(metadata => {
-      const data = metadata.open
+      const data = metadata.openGraph ? metadata.openGraph : metadata.general
+
+      if (!data) {
+        throw new Error('No metadata found')
+      } else {
+        metaObj.name = (metadata.general) ? metadata.general.title : ''
+
+        metaObj.type = data.type ? data.type : ''
+        metaObj.description = metadata.general.description ? metadata.general.description : ''
+        metaObj.imageUrl = data.image ? data.image.url : ''
+        metaObj.found = false
+
+
+        return metaObj
+      }
+    })
