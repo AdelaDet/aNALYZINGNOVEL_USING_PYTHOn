@@ -45,4 +45,24 @@ resourcesPath2 = [
     type: 'pdf'
   },
   {
-    ur
+    url: 'https://www.fullstackacademy.com/jumpstart-online',
+    name: 'Javascript Jumpstart',
+    type: 'web-course'
+  }
+]
+
+//es6, javascript
+
+resourcesPath3 = [
+  {
+    url: 'http://es6-features.org/#Constants',
+    name: 'ES6.org',
+    type: 'documentation'
+  },
+  {
+    url: 'https://es6.io/',
+    name: 'Wes Bos ES6 for everyone',
+    type: 'web-course'
+  },
+  {
+    url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions',
