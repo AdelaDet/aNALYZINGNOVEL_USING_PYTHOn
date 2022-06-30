@@ -102,4 +102,15 @@ const updateSeed = async () => {
     //             imageUrl: metaObj.imageUrl
     //           }
     //         )
-    //     
+    //       }
+    //     }).then(results => {return results})
+    //     .catch(err => {
+    //       console.error(url, ' -------', err.message)
+    //     })
+    // })
+  }
+}
+
+// updateSeed()
+// getMetadata('https://www.codeproject.com/Articles/126380/Writing-Readable-SQL')
+module.exports = {getMetadata, updateSeed}
