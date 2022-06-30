@@ -77,4 +77,15 @@ const updateSeed = async () => {
     // urls.forEach(async url => {
     //   await scrape(url)
     //     .then(async metadata => {
-    //       let meta
+    //       let metaObj = {}
+    //       data = metadata.openGraph
+
+    //       if (!data || !data.name) {
+    //         throw new Error('No metadata found or empty string returned')
+    //       } else {
+    //         metaObj.name = data.name ? data.name : ''
+    //         metaObj.type = data.type ? data.type : ''
+    //         metaObj.description = data.description ? data.description : ''
+    //         metaObj.imageUrl = data.image ? data.image.url : ''
+
+    //         await session.run
