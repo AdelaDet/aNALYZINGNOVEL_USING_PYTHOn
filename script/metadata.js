@@ -60,4 +60,21 @@ const updateSeed = async () => {
           `
           MATCH (r:Resource)
           WHERE r.url = {url}
-          SET r.name = {name}, r.type = {type}, r.description 
+          SET r.name = {name}, r.type = {type}, r.description = {description}, r.imageUrl = {imageUrl}
+        `,
+          {
+            url: urls[i],
+            type: metaObj.type,
+            name: metaObj.name,
+            description: metaObj.description,
+            imageUrl: metaObj.imageUrl
+          }
+        )
+      }
+    } catch (err) {
+      console.error('error with ', urls[i], ' -- ', err.message)
+    }
+    // urls.forEach(async url => {
+    //   await scrape(url)
+    //     .then(async metadata => {
+    //       let meta
