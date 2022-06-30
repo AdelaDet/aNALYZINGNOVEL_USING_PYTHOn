@@ -20,4 +20,29 @@ const resourcesPath1 = [
     },
     {
       url: 'https://youtu.be/bIK2NwoK9xk',
-      name
+      name: 'styling react components',
+      type: 'video'
+    }
+
+],
+
+
+//category: javascript
+resourcesPath2 = [
+  {
+    url: 'http://crockford.com/javascript/',
+    name: 'Javascript Encyclopedia',
+    type: 'website'
+  },
+  {
+    url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide',
+    name: 'MDN Javascript Guide',
+    type: 'documentation'
+  },
+  {
+    url: 'https://eloquentjavascript.net/Eloquent_JavaScript.pdf',
+    name: 'Eloquent Javascript',
+    type: 'pdf'
+  },
+  {
+    ur
