@@ -88,4 +88,18 @@ const updateSeed = async () => {
     //         metaObj.description = data.description ? data.description : ''
     //         metaObj.imageUrl = data.image ? data.image.url : ''
 
-    //         await session.run
+    //         await session.run(
+    //           `
+    //       MATCH (r:Resource)
+    //       WHERE r.url = {url}
+    //       SET r.name = {name}, r.type = {type}, r.description = {description}, r.imageUrl = {imageUrl}
+    //     `,
+    //           {
+    //             url: url,
+    //             type: metaObj.type,
+    //             name: metaObj.name,
+    //             description: metaObj.description,
+    //             imageUrl: metaObj.imageUrl
+    //           }
+    //         )
+    //     
