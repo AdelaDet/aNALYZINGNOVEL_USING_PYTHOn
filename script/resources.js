@@ -66,3 +66,25 @@ resourcesPath3 = [
   },
   {
     url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions',
+    name: 'Arrow Functions MDN',
+    type: 'website'
+  },
+  {
+    url: 'https://davidwalsh.name/spread-operator',
+    name: '6 great uses of the spread operator',
+    type: 'article'
+  }
+
+
+]
+
+//neo4j
+const resourcePath4 = [
+  {
+    url: 'https://neo4j.com/docs/cypher-refcard/current/?ref=browser-guide',
+    name: 'Neo4j Cypher Refcard',
+    type: 'documentation'
+  },
+  {
+    url: 'https://neo4j.com/neoassets/graphbooks/Graph_Databases_2e_Neo4j.pdf',
+    nam
