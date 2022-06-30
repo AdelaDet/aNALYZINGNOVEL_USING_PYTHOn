@@ -87,4 +87,27 @@ const resourcePath4 = [
   },
   {
     url: 'https://neo4j.com/neoassets/graphbooks/Graph_Databases_2e_Neo4j.pdf',
-    nam
+    name: "O'Reilly Graph Databases",
+    type: 'pdf'
+  },
+  {
+    url: 'https://neo4j.com/developer/',
+    name: 'Neo4j developer site',
+    type: 'website'
+  },
+  {
+    url: 'https://neo4j.com/sandbox-v2/',
+    name: 'Neo4J sandbox',
+    type: 'tutorial'
+  }
+]
+
+//sequelize
+const resourcesPath5 = [
+  {
+    url: 'http://sequelize.readthedocs.io/en/v3/',
+    name: 'Sequelize Documentation',
+    type: 'documentation'
+  },
+  {
+    url: 'https://medium.com/@jasmine.esplago.munoz/feeling-the-magic-with-s
