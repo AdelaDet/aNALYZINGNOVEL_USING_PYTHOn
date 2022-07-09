@@ -166,3 +166,19 @@ const resourcesPath7 = [
   },
   {
     url: 'https://www.codecademy.com/learn/learn-html',
+    name: 'Learn HTML',
+    type: 'web-course'
+  },
+  {
+    url: 'https://html.com/html5/',
+    name: "HTML5: What's New in the Latest Version of HTML",
+    type: 'article'
+  },
+  {
+
+  }
+
+]
+
+
+
