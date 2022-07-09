@@ -130,4 +130,19 @@ const resourcesPath5 = [
 //Express
 const resourcesPath6 = [
   {
-    url: 'https://express
+    url: 'https://expressjs.com/',
+    name: 'Express Documentation',
+    type: 'documentation'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=gnsO8-xJ8rs',
+    name: 'Express js Crash Course',
+    type: 'video'
+  },
+  {
+   url: 'https://medium.freecodecamp.org/getting-off-the-ground-with-expressjs-89ada7ef4e59',
+   name: 'Getting off the Ground with Express.js',
+   type: 'article'
+  },
+  {
+   url: 'https://codeburst.io/build-a-weather-website-in-30-minutes-with-node-js-express-openweather-a317f90489
