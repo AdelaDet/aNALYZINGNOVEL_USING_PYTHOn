@@ -110,4 +110,24 @@ const resourcesPath5 = [
     type: 'documentation'
   },
   {
-    url: 'https://medium.com/@jasmine.esplago.munoz/feeling-the-magic-with-s
+    url: 'https://medium.com/@jasmine.esplago.munoz/feeling-the-magic-with-sequelize-magic-methods-e9cc89ecdcc5',
+    name: 'Feeling the Magic with Sequelize Magic Methods',
+    type: 'article'
+  },
+  {
+    url: 'https://gist.github.com/elliette/20ddc4e827efd9d62bc98752e7a62610',
+    name: 'Defining many-to-many Association Sequelize',
+    type: 'gist'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=Bv07mHw32TQ',
+    name: 'Creating Models with Sequelize',
+    type: 'video'
+  }
+]
+
+
+//Express
+const resourcesPath6 = [
+  {
+    url: 'https://express
