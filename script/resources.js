@@ -145,4 +145,24 @@ const resourcesPath6 = [
    type: 'article'
   },
   {
-   url: 'https://codeburst.io/build-a-weather-website-in-30-minutes-with-node-js-express-openweather-a317f90489
+   url: 'https://codeburst.io/build-a-weather-website-in-30-minutes-with-node-js-express-openweather-a317f904897b',
+   name: 'Build a Weather Website in 30 Minutes with Node.js and Express',
+   type: 'article'
+  }
+]
+
+
+
+const resourcesPath7 = [
+  {
+    url: 'https://www.w3schools.com/Html/',
+    name: 'HTML5 Tutorial',
+    type: 'tutorial'
+  },
+  {
+    url: 'https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started',
+    name: 'Getting started with HTML',
+    type: 'article'
+  },
+  {
+    url: 'https://www.codecademy.com/learn/learn-html',
