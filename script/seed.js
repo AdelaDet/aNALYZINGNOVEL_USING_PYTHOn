@@ -25,4 +25,16 @@
 //     User.create({email: 'murphy@email.com', password: '123'})
 //   ])
 //   // Wowzers! We can even `await` on the right-hand side of the assignment operator
+//   // and store the result that the promise resolves to in a variable! This is nice!
+//   console.log(`seeded ${users.length} users`)
+//   console.log(`seeded successfully`)
+// }
+
+// // We've separated the `seed` function from the `runSeed` function.
+// // This way we can isolate the error handling and exit trapping.
+// // The `seed` function is concerned only with modifying the database.
+// async function runSeed() {
+//   console.log('seeding...')
+//   try {
+//     await seed()
 /
