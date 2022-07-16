@@ -67,4 +67,22 @@ router.get('/:pathUid', async (req, res, next) => {
     const query=`
       MATCH (p:Path), (u:User)-[:PATHS]->(p)
       WHERE p.uid = {uid}
-      WITH p, count(dist
+      WITH p, count(distinct u) as subscribers
+      OPTIONAL MATCH (p)-[:STEPS*]->(s:Step)-[:RESOURCE]->(r:Resource)
+      RETURN { details: p, steps: collect( { step: s, resource: r } ), subscribers: subscribers }`
+
+    const result = await session.run(query, {uid: param})
+
+    const singlePath = result.records.map(record => {
+      return record._fields
+    })
+
+    res.send(singlePath)
+    session.close()
+  } catch (err) {
+    next(err)
+  }
+})
+
+// GET: api/paths/byName/:name
+router.get('/byName/:name', async (r
