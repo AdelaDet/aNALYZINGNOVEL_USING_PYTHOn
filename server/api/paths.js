@@ -85,4 +85,22 @@ router.get('/:pathUid', async (req, res, next) => {
 })
 
 // GET: api/paths/byName/:name
-router.get('/byName/:name', async (r
+router.get('/byName/:name', async (req, res, next) => {
+  try {
+    const param = req.params.name
+
+    const query = `
+    MATCH (p:Path) WHERE p.name = {name}
+    OPTIONAL MATCH (p)-[:STEPS*]->(s:Step)-[:RESOURCE]->(r:Resource)
+    RETURN { details: p, steps: collect( { step: s, resource: r } ) }`
+
+    const result = await session.run(query, {name: param})
+
+    const singlePath = result.records.map(record => {
+      return record._fields
+    })
+
+    res.send(singlePath[0])
+    session.close()
+  } catch (err) {
+    next(err
