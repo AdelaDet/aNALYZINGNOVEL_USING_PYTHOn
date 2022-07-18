@@ -103,4 +103,20 @@ router.get('/byName/:name', async (req, res, next) => {
     res.send(singlePath[0])
     session.close()
   } catch (err) {
-    next(err
+    next(err)
+  }
+})
+
+// GET: api/paths/:uid/user/:username/completed
+router.get('/:uid/user/:username/completed', async (req, res, next) => {
+  try {
+    const uid = req.params.uid
+    const username = req.params.username
+
+    const query = `MATCH (u)-[:PATHS]->(p:Path)
+    WHERE p.uid = {uid} and u.name = {username}
+    OPTIONAL MATCH (p)-[:STEPS*]->(s:Step)-[:RESOURCE]->(r:Resource)
+    OPTIONAL MATCH (u)-[c:COMPLETED]->(s)
+    RETURN { steps: collect({ step: s, resource: r, completed: c })}`
+
+    const data = await session
