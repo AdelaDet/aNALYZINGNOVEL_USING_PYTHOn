@@ -155,4 +155,26 @@ router.put('/:uid/togglePublic', async (req, res, next) => {
         SET p.status = {status}
         WITH p, count(distinct u) as subscribers
         OPTIONAL MATCH (p)-[:STEPS*]->(s:Step)-[:RESOURCE]->(r:Resource)
-        RETURN
+        RETURN { details: p, steps: collect( { step: s, resource: r } ), subscribers: subscribers }
+
+      `,
+      {uid, status}
+    )
+
+
+    const singlePath = result.records.map(record => {
+      return record._fields
+    })
+
+    res.send(singlePath)
+
+
+  } catch (err) {
+    next(err)
+  }
+})
+
+// PUT: api/paths/:pathUid/user/:username/status/:bool/step/:stepUrl
+router.put(
+  '/:pathUid/user/:username/status/:completed/step/:stepUrl',
+  async (req, res, next) =>
