@@ -223,4 +223,15 @@ router.post(
         ? decodeURIComponent(req.params.stepUrl)
         : decodeURIComponent('http://' + req.params.stepUrl)
       const createdDate = Date.now()
-      co
+      const newUid = shortid.generate()
+
+      // create the resource if it doesn't exist yet
+      if (req.body.type === 'new') {
+        const resourceQuery = `
+      CREATE (r:Resource { name: {name}, description: {description}, createdDate: {createdDate}, url: {url}, uid: {uid}, type: {type}, imageUrl: {imageUrl} })
+      `
+        await session.run(resourceQuery, {
+          name: req.body.title,
+          description: req.body.description,
+          type: req.body.type1,
+          imageUr
