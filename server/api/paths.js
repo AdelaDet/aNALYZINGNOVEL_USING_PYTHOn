@@ -190,4 +190,21 @@ router.put(
         query = `
       MATCH (u:User)-[:PATHS]->(p:Path)-[:STEPS*]->(s:Step)-[:RESOURCE]->(r:Resource)
       WHERE u.name = {username} and p.uid = {uid} and r.url = {stepUrl}
-      OP
+      OPTIONAL MATCH (u)-[c:COMPLETED]->(s)
+      DELETE c
+      `
+      } else if (completed === 'false') {
+        // Add the relationship
+        query = `
+      MATCH (u:User)-[:PATHS]->(p:Path)-[:STEPS*]->(s:Step)-[:RESOURCE]->(r:Resource)
+      WHERE u.name = {username} and p.uid = {uid} and r.url = {stepUrl}
+      CREATE (u)-[:COMPLETED]->(s)
+      `
+      }
+
+      await session.run(query, {uid, username, stepUrl})
+
+      res.send(stepUrl)
+      session.close()
+    } catch (err) {
+ 
