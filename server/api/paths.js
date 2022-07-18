@@ -177,4 +177,17 @@ router.put('/:uid/togglePublic', async (req, res, next) => {
 // PUT: api/paths/:pathUid/user/:username/status/:bool/step/:stepUrl
 router.put(
   '/:pathUid/user/:username/status/:completed/step/:stepUrl',
-  async (req, res, next) =>
+  async (req, res, next) => {
+    try {
+      const uid = req.params.pathUid
+      const username = req.params.username
+      const stepUrl = decodeURIComponent(req.params.stepUrl)
+      const completed = req.params.completed
+      let query = ''
+
+      if (completed === 'true') {
+        // Remove the relationship
+        query = `
+      MATCH (u:User)-[:PATHS]->(p:Path)-[:STEPS*]->(s:Step)-[:RESOURCE]->(r:Resource)
+      WHERE u.name = {username} and p.uid = {uid} and r.url = {stepUrl}
+      OP
