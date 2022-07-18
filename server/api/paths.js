@@ -119,4 +119,27 @@ router.get('/:uid/user/:username/completed', async (req, res, next) => {
     OPTIONAL MATCH (u)-[c:COMPLETED]->(s)
     RETURN { steps: collect({ step: s, resource: r, completed: c })}`
 
-    const data = await session
+    const data = await session.run(query, {uid, username})
+
+    const steps = data.records.map(record => {
+      return record._fields[0].steps
+    })
+
+    const completionStatus = steps[0].map(el => {
+      const completed = el.completed !== null
+      return {
+        stepName: el.resource.properties.name,
+        stepUrl: el.resource.properties.url,
+        completed
+      }
+    })
+
+    res.send(completionStatus)
+    session.close()
+  } catch (err) {
+    next(err)
+  }
+})
+
+// PUT: /api/paths/:uid/togglePublic/
+router.put('/:uid/toggle
