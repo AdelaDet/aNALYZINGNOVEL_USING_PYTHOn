@@ -207,4 +207,20 @@ router.put(
       res.send(stepUrl)
       session.close()
     } catch (err) {
- 
+      next(err)
+    }
+  }
+)
+
+// PUT `/api/paths/${pathUid}/user/${username}/step/${urlEncoded}`
+router.post(
+  '/:pathUid/user/:username/step/:stepUrl',
+  async (req, res, next) => {
+    try {
+      const uid = req.params.pathUid
+      const username = req.params.username
+      const stepUrl = req.params.stepUrl.startsWith('http')
+        ? decodeURIComponent(req.params.stepUrl)
+        : decodeURIComponent('http://' + req.params.stepUrl)
+      const createdDate = Date.now()
+      co
