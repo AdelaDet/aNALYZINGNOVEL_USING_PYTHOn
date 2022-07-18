@@ -142,4 +142,17 @@ router.get('/:uid/user/:username/completed', async (req, res, next) => {
 })
 
 // PUT: /api/paths/:uid/togglePublic/
-router.put('/:uid/toggle
+router.put('/:uid/togglePublic', async (req, res, next) => {
+  try {
+    // let status = req.body.bool ? 'public' : 'draft'
+    let status = req.body.hasOwnProperty('public') ? 'public' : 'draft'
+
+    let uid = req.params.uid
+    let result = await session.run(
+      `
+        MATCH (p:Path), (u:User)-[:PATHS]->(p)
+        WHERE p.uid = {uid}
+        SET p.status = {status}
+        WITH p, count(distinct u) as subscribers
+        OPTIONAL MATCH (p)-[:STEPS*]->(s:Step)-[:RESOURCE]->(r:Resource)
+        RETURN
