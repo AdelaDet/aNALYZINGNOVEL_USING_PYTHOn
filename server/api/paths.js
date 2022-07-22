@@ -234,4 +234,23 @@ router.post(
           name: req.body.title,
           description: req.body.description,
           type: req.body.type1,
-          imageUr
+          imageUrl: req.body.imageUrl,
+          url: stepUrl,
+          uid: newUid,
+          createdDate
+        })
+      }
+
+      // Get last step name in path
+      const query = `
+    MATCH (u:User)-[:PATHS]->(p:Path)
+    WHERE p.uid = {uid} AND u.name = {username}
+    OPTIONAL MATCH (p)-[:STEPS*]->(s:Step)
+    RETURN s.name
+    ORDER BY s.name DESC
+    LIMIT 1
+    `
+      const result = await session.run(query, {uid, username, stepUrl})
+
+      // If there aren't any steps yet, add resource as 'Step 1'
+      if
