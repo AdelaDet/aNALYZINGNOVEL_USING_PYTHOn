@@ -277,4 +277,26 @@ router.post(
         const newStepName = `Step ` + (Number(newStepNum) + 1)
 
         const addStepQuery = `
-      MATCH (u:User)-[:PATHS]->(p:Path), (r:Resourc
+      MATCH (u:User)-[:PATHS]->(p:Path), (r:Resource)
+      WHERE p.uid = {uid} AND u.name = {username} AND r.url = {stepUrl}
+      CREATE (s:Step { name: {newStepName} }),
+      (p)-[:STEPS]->(s)-[:RESOURCE]->(r)
+      `
+        const addedNewStep = await session.run(addStepQuery, {
+          uid,
+          username,
+          stepUrl,
+          newStepName
+        })
+
+        res.send(addedNewStep)
+      }
+    } catch (err) {
+      next(err)
+    }
+  }
+)
+
+// POST: api/paths/
+router.post('/', async (req, res, next) => {
+  const createdDat
