@@ -253,4 +253,19 @@ router.post(
       const result = await session.run(query, {uid, username, stepUrl})
 
       // If there aren't any steps yet, add resource as 'Step 1'
-      if
+      if (!result.records[0]._fields[0]) {
+        const addStep1Query = `
+      MATCH (u:User)-[:PATHS]->(p:Path), (r:Resource)
+      WHERE p.uid = {uid} AND u.name = {username} AND r.url = {stepUrl}
+      CREATE (s:Step { name: "Step 1"}),
+      (p)-[:STEPS]->(s)-[:RESOURCE]->(r)
+      `
+        const addedAsStep1 = await session.run(addStep1Query, {
+          uid,
+          username,
+          stepUrl
+        })
+
+        res.send(addedAsStep1)
+      } else {
+ 
