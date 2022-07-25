@@ -268,4 +268,13 @@ router.post(
 
         res.send(addedAsStep1)
       } else {
- 
+        // Else get last digit of last existing step and increment new step name
+        const lastStepName = result.records[0]._fields[0]
+        const newStepNum = lastStepName.substr(
+          lastStepName.indexOf(' '),
+          lastStepName.length - 1
+        )
+        const newStepName = `Step ` + (Number(newStepNum) + 1)
+
+        const addStepQuery = `
+      MATCH (u:User)-[:PATHS]->(p:Path), (r:Resourc
