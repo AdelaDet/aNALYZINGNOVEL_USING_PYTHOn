@@ -299,4 +299,16 @@ router.post(
 
 // POST: api/paths/
 router.post('/', async (req, res, next) => {
-  const createdDat
+  const createdDate = Date.now()
+  const uid = shortid.generate()
+  const slug = makeSlug(req.body.name)
+
+  try {
+    const newPath = `
+    MATCH (u:User), (c:Category)
+    WHERE u.name = {username} AND c.name = {category}
+    CREATE (p:Path {name: {name}, description: {description}, level: {level}, status: {status}, owner: {username}, createdDate: {createdDate}, uid: {uid}, slug: {slug}}),
+    (u)-[:PATHS {notes: {notes}}]->(p),
+    (p)-[:CATEGORY]->(c)`
+
+    const created =
