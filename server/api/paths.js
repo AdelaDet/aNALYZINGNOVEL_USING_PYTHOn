@@ -311,4 +311,28 @@ router.post('/', async (req, res, next) => {
     (u)-[:PATHS {notes: {notes}}]->(p),
     (p)-[:CATEGORY]->(c)`
 
-    const created =
+    const created = await session.run(newPath, {
+      category: req.body.language,
+      username: req.body.user,
+      name: req.body.name,
+      description: req.body.description,
+      level: req.body.level,
+      status: 'draft',
+      notes: '',
+      uid,
+      slug,
+      createdDate
+    })
+
+    const result = [
+      {details: {properties: created.summary.statement.parameters}}
+    ]
+
+    res.send(result)
+    session.close()
+  } catch (err) {
+    next(err)
+  }
+})
+
+// DELETE: api/paths/:name
