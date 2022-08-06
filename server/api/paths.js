@@ -336,3 +336,27 @@ router.post('/', async (req, res, next) => {
 })
 
 // DELETE: api/paths/:name
+router.delete('/:uid', async (req, res, next) => {
+  try {
+    const uid = req.params.uid
+
+    const query = `
+    MATCH (p:Path) WHERE p.uid = {uid}
+    DETACH DELETE p`
+
+    await session.run(query, {uid})
+
+    res.send(uid)
+    session.close()
+  } catch (err) {
+    next(err)
+  }
+})
+
+
+//follow a public path
+router.put('/:slug/:uid/follow', async (req, res, next) => {
+  try {
+    const { userUid, pathUid } = req.body
+
+    const query = `MATCH (u:User { uid: {userUid} }),(p:Path {uid: {pathUid}, st
