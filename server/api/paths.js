@@ -359,4 +359,26 @@ router.put('/:slug/:uid/follow', async (req, res, next) => {
   try {
     const { userUid, pathUid } = req.body
 
-    const query = `MATCH (u:User { uid: {userUid} }),(p:Path {uid: {pathUid}, st
+    const query = `MATCH (u:User { uid: {userUid} }),(p:Path {uid: {pathUid}, status: 'public'})
+    MERGE (u)-[:PATHS]->(p)
+    RETURN u, p`
+
+    const followPath = await session.run(query, {userUid, pathUid})
+
+    res.json(followPath)
+    session.close()
+
+  }catch(err){
+    console.error(err)
+    next(err)
+  }
+
+})
+
+router.put('/:slug/:uid/unfollow', async (req, res, next) => {
+  try{
+    const { username, pathUid } = req.body
+    const query = `MATCH (u:User {name: {username}})-[r:PATHS]->(p:Path {uid: {pathUid}})
+    DELETE r
+    `
+    const unfollo
