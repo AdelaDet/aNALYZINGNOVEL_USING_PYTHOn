@@ -381,4 +381,20 @@ router.put('/:slug/:uid/unfollow', async (req, res, next) => {
     const query = `MATCH (u:User {name: {username}})-[r:PATHS]->(p:Path {uid: {pathUid}})
     DELETE r
     `
-    const unfollo
+    const unfollowPath = await session.run(query, {username, pathUid})
+    res.send(unfollowPath)
+  }catch(err){
+    console.error(err)
+    next(err)
+  }
+})
+
+
+router.get('/:pathuid/:username/get-review', async (req, res, next) => {
+  try{
+    const { username, pathuid } = req.params
+    const query = `MATCH (u:User)-[:REVIEWS]->(r)-[:REVIEWS]->(p:Path)
+    WHERE u.name = {username} AND p.uid = {pathuid}
+    RETURN r.score, r.comments
+    `
+    const currentUserRating = await session
