@@ -436,4 +436,13 @@ router.post('/:uid/rate-path', async (req, res, next) => {
 
 // Removes a path's step
 // it takes in the index to remove and the last index(for count: otherwise a
-// 
+// separate call will need to be made to check if the last index was removed)
+// POST: /api/paths/remove/:pathUid/:lastIndex/:stepIndex/
+router.post('/remove/:pathUid/:lastIndex/:stepIndex/', async (req, res, next) => {
+  try{
+    const pathUid   = req.params.pathUid
+    const lastIndex = req.params.lastIndex
+    const stepIndex = req.params.stepIndex
+
+    if(stepIndex   < 1 || stepIndex   > lastIndex) {
+       throw new Error('"stepIndex" value is either out
