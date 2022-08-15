@@ -445,4 +445,20 @@ router.post('/remove/:pathUid/:lastIndex/:stepIndex/', async (req, res, next) =>
     const stepIndex = req.params.stepIndex
 
     if(stepIndex   < 1 || stepIndex   > lastIndex) {
-       throw new Error('"stepIndex" value is either out
+       throw new Error('"stepIndex" value is either out of range!!')
+    }
+
+    let query = ''
+
+    if(stepIndex === lastIndex) {
+    //if removing the last index
+      query = `
+        MATCH (p:Path {uid:{pUid}})-[:STEPS*` + stepIndex + `]->(stepRem:Step)
+        WITH stepRem , p
+        MATCH (stepRemP)-[stepRemPE:STEPS]->(stepRem)
+        WITH stepRem, stepRemP, p, stepRemPE
+        DETACH DELETE stepRemPE, stepRem
+      `
+    }else{
+      query = `
+        MATCH (p:Path {uid:{pUid}})-[:STEPS*` + 
