@@ -415,4 +415,25 @@ router.post('/:uid/rate-path', async (req, res, next) => {
     const query = `MATCH (u:User), (p:Path)
     WHERE u.name = {username} AND p.uid = {pathuid}
     MERGE (u)-[:REVIEWS]->(r:Review)-[:REVIEWS]->(p)
-    ON CREATE 
+    ON CREATE SET
+      r.score = {ratingStars},
+      r.comments = {ratingText},
+      r.createdDate = timestamp(),
+      r.uid = {newId}
+    ON MATCH SET
+      r.score = {ratingStars},
+      r.comments = {ratingText}
+    RETURN r`
+
+    const ratePath = await session.run(query, {username, pathuid, ratingText, newId, ratingStars})
+    res.json(ratePath)
+
+  } catch(err) {
+    console.error(err)
+    next(err)
+  }
+})
+
+// Removes a path's step
+// it takes in the index to remove and the last index(for count: otherwise a
+// 
