@@ -397,4 +397,22 @@ router.get('/:pathuid/:username/get-review', async (req, res, next) => {
     WHERE u.name = {username} AND p.uid = {pathuid}
     RETURN r.score, r.comments
     `
-    const currentUserRating = await session
+    const currentUserRating = await session.run(query, {username, pathuid})
+    res.json(currentUserRating)
+
+  } catch(err) {
+    console.error(err)
+    next(err)
+  }
+
+})
+
+
+router.post('/:uid/rate-path', async (req, res, next) => {
+  try {
+    const { username, pathuid, ratingText, ratingStars} = req.body
+    const newId = shortid.generate()
+    const query = `MATCH (u:User), (p:Path)
+    WHERE u.name = {username} AND p.uid = {pathuid}
+    MERGE (u)-[:REVIEWS]->(r:Review)-[:REVIEWS]->(p)
+    ON CREATE 
