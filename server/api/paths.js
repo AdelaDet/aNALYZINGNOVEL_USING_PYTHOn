@@ -461,4 +461,18 @@ router.post('/remove/:pathUid/:lastIndex/:stepIndex/', async (req, res, next) =>
       `
     }else{
       query = `
-        MATCH (p:Path {uid:{pUid}})-[:STEPS*` + 
+        MATCH (p:Path {uid:{pUid}})-[:STEPS*` + stepIndex + `]->(stepRem:Step)
+        WITH stepRem, p
+        MATCH (stepRemP)-[stepRemPE:STEPS]->(stepRem)-[stepRemNE:STEPS]->(stepRemN)
+        WITH stepRem, stepRemP, stepRemN, p, stepRemPE, stepRemNE
+        DETACH DELETE stepRemPE, stepRemNE, stepRem
+        CREATE (stepRemP)-[:STEPS]->(stepRemN)
+      `
+    }
+
+    const queryReturn = `
+       WITH p
+       MATCH (u:User)-[:PATHS]->(p)
+       WITH p, count(distinct u) as subscribers
+
+       OPTIONAL MATCH (p)-[:ST
