@@ -497,4 +497,18 @@ router.post('/remove/:pathUid/:lastIndex/:stepIndex/', async (req, res, next) =>
 
     res.send(singlePath)
     session.close()
-  }
+  } catch (err) { next(err) }
+})
+
+// Reorders a path's steps
+// it takes in the indexes to move: from, to
+// POST: /api/paths/reorder/:stepCount/:uid/:fromIndex/:toIndex
+router.post('/reorder/:pathUid/:stepCount/:fromIndex/:toIndex', async (req, res, next) => {
+  try{
+    const from   = req.params.fromIndex
+    const to     = req.params.toIndex
+    const lastIndex = req.params.stepCount
+
+    if(from === to ||
+       from < 1 ||
+      
