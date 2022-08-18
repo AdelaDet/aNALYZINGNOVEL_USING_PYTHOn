@@ -525,4 +525,15 @@ router.post('/reorder/:pathUid/:stepCount/:fromIndex/:toIndex', async (req, res,
             //if moving TO the last index
             query = `
               MATCH (p:Path {uid : {pUid}})-[:STEPS*` + from + `]->(fromC:Step)
-           
+              WITH fromC, p
+              MATCH (fromP)-[fromPE:STEPS]->(fromC)-[fromNE:STEPS]->(fromN)
+              WITH fromC, fromP, fromN, p, fromPE, fromNE
+              MATCH (p)-[:STEPS*` + to + `]->(toC:Step)
+              WITH toC, fromC, fromP, fromN, fromPE, fromNE, p
+              MATCH (toP)-[toPE:STEPS]->(toC)
+              DELETE fromPE, fromNE
+              CREATE (fromP)-[:STEPS]->(fromN), (toC)-[:STEPS]->(fromC)
+            `
+          } else{
+            query = `
+              MATCH (p:Path {uid : {pUid}})-[:STEP
