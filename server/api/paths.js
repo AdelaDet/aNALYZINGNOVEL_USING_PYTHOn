@@ -511,4 +511,18 @@ router.post('/reorder/:pathUid/:stepCount/:fromIndex/:toIndex', async (req, res,
 
     if(from === to ||
        from < 1 ||
-      
+       to   < 1 ||
+       from > lastIndex ||
+       to   > lastIndex) {
+       throw new Error('"from" and "to" values are either out of range or the same value!!')
+    } else {
+
+        let query = ''
+
+        if(from < to) {
+          //moving from top down
+          if(to === lastIndex) {
+            //if moving TO the last index
+            query = `
+              MATCH (p:Path {uid : {pUid}})-[:STEPS*` + from + `]->(fromC:Step)
+           
