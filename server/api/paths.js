@@ -475,4 +475,26 @@ router.post('/remove/:pathUid/:lastIndex/:stepIndex/', async (req, res, next) =>
        MATCH (u:User)-[:PATHS]->(p)
        WITH p, count(distinct u) as subscribers
 
-       OPTIONAL MATCH (p)-[:ST
+       OPTIONAL MATCH (p)-[:STEPS*]->(s:Step)-[:RESOURCE]->(r:Resource)
+       RETURN {
+         details: p,
+         steps: collect({
+           step: s,
+           resource: r }),
+         subscribers: subscribers
+       }
+    `
+
+    query += queryReturn
+
+    const result = await session.run(query, {
+       pUid : req.params.pathUid,
+    })
+
+    const singlePath = result.records.map(record => {
+      return record._fields
+    })
+
+    res.send(singlePath)
+    session.close()
+  }
