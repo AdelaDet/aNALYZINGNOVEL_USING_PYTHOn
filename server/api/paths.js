@@ -556,4 +556,14 @@ router.post('/reorder/:pathUid/:stepCount/:fromIndex/:toIndex', async (req, res,
               WITH fromC, p
               MATCH (fromP)-[fromPE:STEPS]->(fromC)
               WITH fromC, fromP, p, fromPE
-              
+              MATCH (p)-[:STEPS*` + to + `]->(toC:Step)
+              WITH fromC, fromP, p, fromPE, toC
+              MATCH (toP)-[toPE:STEPS]->(toC)-[toNE:STEPS]->(toN)
+              DELETE fromPE, toPE
+              CREATE (toP)-[:STEPS]->(fromC)-[:STEPS]->(toC)
+            `
+          }else{
+            query = `
+              MATCH (p:Path {uid:{pUid}})-[:STEPS*` + from + `]->(fromC:Step)
+              WITH fromC, p
+              MATCH (fromP)-[fromPE:STEPS]->(fromC)-[fr
