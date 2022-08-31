@@ -578,4 +578,24 @@ router.post('/reorder/:pathUid/:stepCount/:fromIndex/:toIndex', async (req, res,
         }
 
         const queryReturn = `
-          WITH 
+          WITH p
+          MATCH (u:User)-[:PATHS]->(p)
+          WITH p, count(distinct u) as subscribers
+
+          OPTIONAL MATCH (p)-[:STEPS*]->(s:Step)-[:RESOURCE]->(r:Resource)
+          RETURN {
+            details: p,
+            steps: collect({
+              step: s,
+              resource: r }),
+            subscribers: subscribers
+          }
+        `
+
+        query += queryReturn
+
+        const result = await session.run(query, {
+           pUid : req.params.pathUid,
+        })
+
+        const singlePath 
