@@ -598,4 +598,15 @@ router.post('/reorder/:pathUid/:stepCount/:fromIndex/:toIndex', async (req, res,
            pUid : req.params.pathUid,
         })
 
-        const singlePath 
+        const singlePath = result.records.map(record => {
+          return record._fields
+        })
+
+        res.send(singlePath)
+        session.close()
+
+      }
+    }catch (err) { next(err) }
+})
+
+module.exports = router
