@@ -13,4 +13,27 @@ router.get(`/:uid/reviews`, async (req,res,next) => {
       RETURN r.name AS resource,
              u.name AS author,
              rev.comments AS comments,
-            
+             rev.score AS score
+    `
+
+    const result = await session.run(query, {uid})
+
+    const reducedResponse = recordsReducer(result.records)
+    const groupedResponse = {}
+    groupedResponse['data'] = reducedResponse
+    groupedResponse.uid = uid
+
+    res.send(groupedResponse)
+    session.close()
+  }catch(e){
+    next(e)
+  }
+})
+
+router.get('/:resourceUid', async (req, res, next) => {
+  try {
+    const param = req.params.pathUid
+
+    const query = `
+    MATCH (r:Resource) WHERE r.uid = {uid}
+    RETURN 
