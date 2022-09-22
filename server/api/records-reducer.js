@@ -67,4 +67,10 @@ EXAMPLE OUTPUT: returnedArray =
       low: 3,
       high: 0
     },
-    ra
+    rating: 4
+    },
+  .
+  .
+  .
+]
+*/
