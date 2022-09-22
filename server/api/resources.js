@@ -36,4 +36,21 @@ router.get('/:resourceUid', async (req, res, next) => {
 
     const query = `
     MATCH (r:Resource) WHERE r.uid = {uid}
-    RETURN 
+    RETURN r`
+
+    const result = await session.run(query, {uid: param})
+
+    const singleRecord = result.records.map((record) => {
+      return record._fields
+    })
+
+    res.send(singleRecord)
+    session.close()
+
+  }catch(err){
+    console.error(err)
+    next(err)
+  }
+})
+
+module.exports = router
