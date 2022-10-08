@@ -34,4 +34,21 @@ router.post('/review', async (req, res, next) => {
 
     const result = await session.run(query, {userUid, resourceUid, rating, createdDate, newReviewUid})
 
-    re
+    res.send(result)
+  } catch (err) { next(err) }
+})
+
+// GET: /api/userAuth/reviews/resource/:resourceUid/user/:userUid
+router.get('/resource/:resourceUid/user/:userUid', async (req, res, next) => {
+  try {
+
+    if (req.user.uid !== req.params.userUid ){
+      res.status(403).send('Unauthorized')
+    }
+
+    const userUid = req.params.userUid
+    const resourceUid = req.params.resourceUid
+
+    const query = `
+      MATCH (u:User)-[:REVIEWS]->(rev:Review)-[:REVIEWS]->(r:Resource)
+      WHERE u.uid
