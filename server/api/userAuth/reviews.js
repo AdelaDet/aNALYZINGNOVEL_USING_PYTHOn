@@ -16,4 +16,22 @@ router.post('/review', async (req, res, next) => {
   const newReviewUid = shortid.generate()
   const userUid = req.body.userUid
   const resourceUid = req.body.resourceUid
-  const rating = req.body.rati
+  const rating = req.body.rating
+
+  try {
+    const query = `
+    MATCH (u:User), (r:Resource)
+    WHERE u.uid = {userUid} AND r.uid = {resourceUid}
+    MERGE (u)-[:REVIEWS]->(rev:Review)-[:REVIEWS]->(r)
+    ON CREATE SET
+      rev.score = {rating},
+      rev.createdDate = {createdDate},
+      rev.uid = {newReviewUid}
+    ON MATCH SET
+      rev.score = {rating}
+    RETURN u, rev, r
+    `
+
+    const result = await session.run(query, {userUid, resourceUid, rating, createdDate, newReviewUid})
+
+    re
