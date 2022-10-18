@@ -51,4 +51,24 @@ router.get('/resource/:resourceUid/user/:userUid', async (req, res, next) => {
 
     const query = `
       MATCH (u:User)-[:REVIEWS]->(rev:Review)-[:REVIEWS]->(r:Resource)
-      WHERE u.uid
+      WHERE u.uid = {userUid} AND r.uid = {resourceUid}
+      RETURN rev.score AS score, r.uid AS resourceUid
+    `
+
+    const result = await session.run(query, {userUid, resourceUid})
+
+    const records = result.records.map(record => {
+      return record._fields
+    })
+
+    const data = {
+      userRating: records[0][0],
+      resourceUid: records[0][1]
+    }
+
+    res.send(data)
+  } catch(err) { next(err) }
+})
+
+module.exports = router
+
