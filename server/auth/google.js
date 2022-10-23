@@ -36,4 +36,22 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
       User.findOrCreate({
         where: {googleId},
-        defaul
+        defaults: {name, email}
+      })
+        .then(([user]) => done(null, user))
+        .catch(done)
+    }
+  )
+
+  passport.use(strategy)
+
+  router.get('/', passport.authenticate('google', {scope: 'email'}))
+
+  router.get(
+    '/callback',
+    passport.authenticate('google', {
+      successRedirect: '/home',
+      failureRedirect: '/login'
+    })
+  )
+}
