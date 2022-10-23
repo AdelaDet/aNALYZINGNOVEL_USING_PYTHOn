@@ -56,4 +56,21 @@ router.post('/login', async (req, res, next) => {
       const saltedPW = crypto
         .createHash('RSA-SHA256')
         .update(pass)
-        .upda
+        .update(user.salt)
+        .digest('hex')
+
+      query = `MATCH (u:User)
+        WHERE u.name = {name} and u.password = {pw}
+        RETURN u`
+
+      response = await session.run(query, {name: name, pw: saltedPW})
+    } else if (!user.salt){
+      //seed file user without salted pw
+      query = `MATCH (u:User)
+        WHERE u.name = {name} and u.password = {pass}
+        RETURN u`
+
+      response = await session.run(query, {name, pass})
+    }
+
+    user = response.records
