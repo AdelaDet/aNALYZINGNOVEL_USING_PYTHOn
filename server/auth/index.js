@@ -32,4 +32,28 @@ router.post('/signup', async (req, res, next) => {
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('User already exists')
     } else {
-      next(
+      next(err)
+    }
+  }
+})
+
+router.post('/login', async (req, res, next) => {
+  try {
+    const name = req.body.name
+    const pass = req.body.password
+
+    //check if user exists
+    let query = `
+    MATCH (u:User)
+    WHERE u.name = {name}
+    RETURN u`
+
+    let response = await session.run(query, {name: name})
+    let user = response.records[0]._fields[0].properties
+
+    //if the pw is salted in the database
+    if (user.salt) {
+      const saltedPW = crypto
+        .createHash('RSA-SHA256')
+        .update(pass)
+        .upda
