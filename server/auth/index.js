@@ -15,4 +15,21 @@ router.post('/signup', async (req, res, next) => {
       .digest('hex')
 
     const query = `
-    CREATE (newuser:User {name: {name}, email: {email}, password: {password}, googleId: '',
+    CREATE (newuser:User {name: {name}, email: {email}, password: {password}, googleId: '', createdDate: timestamp(), isAdmin: false, salt: {salt}})
+    RETURN newuser
+  `
+
+    const response = await session.run(query, {
+      name: name,
+      email: email,
+      password: pass,
+      salt: salt
+    })
+
+    const user = response.records[0]._fields[0].properties
+    req.login(user, err => (err ? next(err) : res.json(user)))
+  } catch (err) {
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      res.status(401).send('User already exists')
+    } else {
+      next(
