@@ -73,4 +73,25 @@ router.post('/login', async (req, res, next) => {
       response = await session.run(query, {name, pass})
     }
 
-    user = response.records
+    user = response.records[0]._fields[0].properties
+
+    req.login(user, err => (err ? next(err) : res.json(user)))
+    driver.close()
+  } catch (err) {
+    res.status(401).send('Wrong username or password')
+  }
+})
+
+router.post('/logout', (req, res) => {
+  req.logout()
+  req.session.destroy()
+  res.redirect('/')
+})
+
+router.get('/me', (req, res) => {
+  res.json(req.user)
+})
+
+router.use('/google', require('./google'))
+
+module.exports = router
