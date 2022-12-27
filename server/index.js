@@ -38,4 +38,25 @@ passport.serializeUser((user, done) => {done(null, user.name) })
 
 passport.deserializeUser(async (name, done) => {
   try {
-    const response = 
+    const response = await session.run(`
+      MATCH (u:User)
+      WHERE u.name ={name}
+      RETURN u
+    `, {name: name})
+    const user = await response.records[0]._fields[0].properties
+    done(null, user)
+  } catch (err) {
+    done(err)
+  }
+})
+
+const createApp = () => {
+  // logging middleware
+  app.use(morgan('dev'))
+
+  // body parsing middleware
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({extended: true}))
+
+  // compression middleware
+  a
