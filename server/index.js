@@ -59,4 +59,23 @@ const createApp = () => {
   app.use(bodyParser.urlencoded({extended: true}))
 
   // compression middleware
-  a
+  app.use(compression())
+
+  // session middleware with passport
+  app.use(
+    sessionExpress({
+      secret: process.env.SESSION_SECRET || 'my best friend is Cody',
+      // store: sessionStore,
+      resave: false,
+      saveUninitialized: false
+    })
+  )
+  app.use(passport.initialize())
+  app.use(passport.session())
+
+  // auth and api routes
+  app.use('/auth', require('./auth'))
+  app.use('/api', require('./api'))
+
+  // static file-serving middleware
+  app.us
