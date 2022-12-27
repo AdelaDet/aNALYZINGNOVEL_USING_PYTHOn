@@ -14,4 +14,16 @@ const socketio = require('socket.io')
 // const neo4j = require('neo4j-driver').v1;
 // const driver = neo4j.driver("bolt://localhost", neo4j.auth.basic("neo4j", "1234"))
 // const neoSession = driver.session();
-const {session} = 
+const {session} = require('../server/db/neo')
+module.exports = app
+
+// This is a global Mocha hook, used for resource cleanup.
+// Otherwise, Mocha v4+ never quits after tests.
+// if (process.env.NODE_ENV === 'test') {
+//   after('close the session store', () => sessionStore.stopExpiringSessions())
+// }
+
+/**
+ * In your development environment, you can keep all of your
+ * app's secret API keys in a file called `secrets.js`, in your project
+ * root. This file is included in the .
