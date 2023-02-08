@@ -22,4 +22,19 @@ describe('Categories API Routes', () => {
     })
   })
 
-  xdescribe('/:categoryName/popular-path
+  xdescribe('/:categoryName/popular-paths', () => {
+    it('returns the correct paths and other info', async () => {
+      const response = await agent.get('/api/categories/Javascript/popular-paths')
+      .expect(200)
+    })
+  })
+
+  xdescribe('/:categoryName/search', () => {
+    it('returns all resources and paths within queried category', async () => {
+      const response = await agent.get('/api/categories/Javascript/search')
+      .expect(200)
+    })
+  })
+
+  xdescribe('/popular', () => {
+    it('returns 
