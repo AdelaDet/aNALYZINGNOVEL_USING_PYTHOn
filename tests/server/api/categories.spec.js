@@ -37,4 +37,9 @@ describe('Categories API Routes', () => {
   })
 
   xdescribe('/popular', () => {
-    it('returns 
+    it('returns the most popular categories, ordered by number of users', async () => {
+      const response = await agent.get('/api/categories/popular')
+      .expect(200)
+    })
+  })
+})
