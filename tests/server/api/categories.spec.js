@@ -6,4 +6,20 @@ const expect = chai.expect;
 // chai.use(chaiThings);
 let neo4j = require('neo4j-driver').v1;
 let driver = neo4j.driver("bolt://localhost", neo4j.auth.basic("neo4j", "1234"))
-let session = driver.s
+let session = driver.session();
+const app = require('../../../server/index.js');
+const agent = require('supertest')(app);
+
+describe('Categories API Routes', () => {
+  // before(async () => {
+  //   //re-seed db?
+  // })
+
+  xdescribe('GET /api/categories/all/parent', () => {
+    it('returns all language categories', async () => {
+      const response = await agent.get('/api/categories/all/parent')
+      .expect(200)
+    })
+  })
+
+  xdescribe('/:categoryName/popular-path
