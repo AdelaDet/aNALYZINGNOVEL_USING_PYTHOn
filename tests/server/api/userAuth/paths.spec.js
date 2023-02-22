@@ -56,4 +56,21 @@ describe("routes", () => {
   it('hits a public route successfully', (done) => {
     request(app).get("/api/userAuth/paths/public")
       .type('json')
-      .expect
+      .expect(200)
+      .then( (res) => {
+        expect(res.body.answer).to.be.null // eslint-disable-line
+      }).then(done)
+    })
+
+  it('GET: api/userAuth/paths/all/user/:username/', () => {
+    return promisedAuthRequest().then(authenticatedagent => {
+      const req = authenticatedagent.get(`/api/userAuth/paths/all/user/${user.name}`)
+        .expect(200)
+        .then(res => {
+          expect(res.body).to.be.an('array')
+      })
+      return req
+    })
+  })
+
+})
