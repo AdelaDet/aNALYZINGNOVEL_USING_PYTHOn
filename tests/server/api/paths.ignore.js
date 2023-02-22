@@ -22,4 +22,22 @@ xdescribe('Paths API Routes', () => {
   })
 
   xdescribe('/api/paths/step/:url', () => {
-    it('returns the resource given in the URL', async 
+    it('returns the resource given in the URL', async () => {
+      const response = await agent
+        .get(
+          '/api/paths/step/https://github.com/trekhleb/javascript-algorithms'
+        )
+        .expect(200)
+
+      //seems like this route may no longer be needed
+    })
+  })
+
+  describe('/api/paths/popular', () => {
+    it('returns the 20 most popular paths by rating', async () => {
+      const response = await agent.get('/api/paths/popular').expect(200)
+    })
+  })
+
+  xdescribe('/api/paths/:uid', () => {
+    it('
