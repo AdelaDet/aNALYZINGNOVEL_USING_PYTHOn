@@ -40,4 +40,18 @@ xdescribe('Paths API Routes', () => {
   })
 
   xdescribe('/api/paths/:uid', () => {
-    it('
+    it('returns a single path with the given uID', async () => {
+      const response = await agent.get('/:pathUid').expect(200)
+    })
+  })
+
+  //redundent route?  probably replaced by uid
+  // pi/paths/byName/:name
+
+  xdescribe('/api/paths/:uid/user/:username/completed', () => {
+    // uid will change with each seed of the database
+
+    it('returns an array of paths, with completion status', async () => {
+      let uid = await session.run(`
+        MATCH (p:Path)
+      
