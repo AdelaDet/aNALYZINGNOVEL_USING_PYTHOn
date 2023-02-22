@@ -67,4 +67,21 @@ xdescribe('Paths API Routes', () => {
   })
 
   // PUT: /api/paths/:pathUid/user/:username/status/:bool/step/:stepUrl
-  xdescribe('PUT: /api/paths/:pathUid/user/:username
+  xdescribe('PUT: /api/paths/:pathUid/user/:username/status/:bool/step/:stepUrl', async () => {
+    let uid = await session.run(`
+        MATCH (p:Path)
+        WHERE p.name='Beginner Python'
+        RETURN p.uid`)
+
+      uid = uid.records[0]._fields[0]
+
+      const url='https://docs.microsoft.com/en-us/scripting/javascript/advanced/advanced-javascript'
+
+      const response = await agent.put(`/api/paths/${uid}/user/Jami/status/true/step/${url}`)
+
+      console.log(response)
+
+  })
+
+
+})
