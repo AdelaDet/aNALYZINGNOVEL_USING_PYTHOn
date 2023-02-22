@@ -19,4 +19,19 @@ const createTestUser = async () => {
     .digest('hex')
 
   const query = `
-  CREATE (newuser:Us
+  CREATE (newuser:User {name: {name}, email: {email}, password: {password}, googleId: '',  createdDate: timestamp(), isAdmin: false, salt: {salt}})
+    RETURN newuser`
+
+  await session.run(query, { name: user.name, email: user.email, password, salt })
+  driver.close()
+  session.close()
+}
+
+function promisedAuthRequest() {
+  const authenticatedagent2b = request.agent(app)
+  return new Promise((resolve, reject) => {
+    authenticatedagent2b
+      .post("/auth/login")
+      .send(user)
+      .end(function(error, res) {
+        if (error) re
