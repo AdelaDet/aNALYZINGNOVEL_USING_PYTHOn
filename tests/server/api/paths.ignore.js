@@ -54,4 +54,17 @@ xdescribe('Paths API Routes', () => {
     it('returns an array of paths, with completion status', async () => {
       let uid = await session.run(`
         MATCH (p:Path)
-      
+        WHERE p.name='Beginner Python'
+        RETURN p.uid`)
+
+      uid = uid.records[0]._fields[0]
+      const response = await agent.get(`/api/paths/${uid}/user/Jami/completed`)
+      let body = response.body
+      expect(Array.isArray(body)).to.be.true // eslint-disable-line no-unused-expressions
+
+      expect(Object.keys(body[0])).to.include('completed')
+    })
+  })
+
+  // PUT: /api/paths/:pathUid/user/:username/status/:bool/step/:stepUrl
+  xdescribe('PUT: /api/paths/:pathUid/user/:username
