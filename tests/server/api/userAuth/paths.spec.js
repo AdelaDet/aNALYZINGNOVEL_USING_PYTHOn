@@ -34,4 +34,26 @@ function promisedAuthRequest() {
       .post("/auth/login")
       .send(user)
       .end(function(error, res) {
-        if (error) re
+        if (error) reject(error)
+        resolve(authenticatedagent2b)
+      })
+  })
+}
+
+describe("routes", () => {
+
+  before( async () => {
+    await createTestUser()
+  })
+
+  after( async () => {
+    const query = `MATCH (u:User { name: 'testUser' }) DELETE u`
+    await session.run(query)
+    driver.close()
+    session.close()
+  })
+
+  it('hits a public route successfully', (done) => {
+    request(app).get("/api/userAuth/paths/public")
+      .type('json')
+      .expect
